@@ -1,0 +1,49 @@
+.main-content {
+    padding: .75rem 0rem;
+}
+
+.right-aside {
+    padding: .75rem 4rem;
+}
+
+.card {
+    margin: 10px 0px;
+}
+
+.card-header:hover {
+    cursor: move;
+}
+
+.card-header.expired,
+.card-header.expired p {
+    color: #f03;
+}
+
+.tabs ul {
+    flex-direction: column;
+    border-bottom-width: 0px;
+}
+
+.tabs ul li {
+    position: relative;
+    width: 100%;
+}
+
+.tabs a {
+    margin-bottom: 0px;
+}
+
+.tabs ul li a {
+    border-bottom-width: 0px;
+    border-right: 1px solid #dadada;
+}
+
+.tabs ul li.is-active a {
+    border: 1px solid #dadada;
+    border-right-width: 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.tabs ul li.expired a {
+    color: #f04;
+}
