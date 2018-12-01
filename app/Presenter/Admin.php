@@ -17,8 +17,6 @@ class Admin
 
     public function renderMenu()
     {
-        // Log::info("route", [$request->decodedPath()]);
-
         $menu = "";
         foreach (self::$menus as $group) {
             if (empty($group["groups"])) {

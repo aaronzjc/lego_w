@@ -41,11 +41,7 @@
                 {!! $menu->renderMenu() !!}
             </div>
             <div class="column is-10 right-aside">
-
-                <div class="columns main-content" id="app">
-                    @yield("content")
-                </div>
-
+                @yield("content")
             </div>
         </div>
     </div>

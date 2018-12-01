@@ -21,4 +21,10 @@ $router->get("/test", function () {
 });
 
 $router->get('/', "Admin\HomeController@index");
-$router->get('/modules', "Admin\HomeController@index");
+
+$router->get('/editModule', ["as" => "edit_module", "uses" => "Admin\HomeController@editRootModule"]);
+$router->post('/editModule', "Admin\HomeController@editRootModule");
+
+$router->get('/editPage', ["as" => "edit_page", "uses" => "Admin\HomeController@editPage"]);
+
+$router->get('/modules', "Admin\HomeController@modules");

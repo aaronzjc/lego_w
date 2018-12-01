@@ -13,7 +13,7 @@ return [
             [
                 "title" => "模块管理",
                 "pattern" => "modules",
-                "route" => "modules",
+                "route" => "/modules",
                 "groups" => []
             ]
         ]
