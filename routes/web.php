@@ -11,8 +11,14 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+$router->get('/version', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/admin', "Admin\HomeController@index");
+$router->get("/test", function () {
+    $admin = app(\App\Presenter\Admin::class);
+    echo $admin->renderMenu();
+});
+
+$router->get('/', "Admin\HomeController@index");
+$router->get('/modules', "Admin\HomeController@index");
