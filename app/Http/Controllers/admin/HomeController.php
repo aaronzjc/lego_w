@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Response;
 use Illuminate\Http\Request;
 use Lego\Services\ModuleService;
 use Log;
@@ -18,20 +19,20 @@ class HomeController extends BaseController
         parent::__construct();
     }
 
-    public function index(ModuleService $service, Request $request)
+    public function index()
+    {
+        return view("admin.index");
+    }
+
+    public function page(ModuleService $service, Request $request)
     {
         $page = $request->get("page", 0);
         $modules = $service->fetchRootModules([], $page);
 
-        return view("admin.home.index", ["modules" => $modules]);
+        return view("admin.page.index", ["modules" => $modules]);
     }
 
-    public function modules()
-    {
-        return view("admin.home");
-    }
-
-    public function editRootModule(ModuleService $service, Request $request)
+    public function editPage(ModuleService $service, Request $request)
     {
         $req = $request->all();
 
@@ -54,11 +55,21 @@ class HomeController extends BaseController
             }
         }
 
-        return view('admin.home.edit', ["data" => $module]);
+        return view('admin.page.edit', ["data" => $module]);
     }
 
-    public function editPage(Request $request)
+    public function configPage(Request $request)
+    {
+        $pageId = $request->get("id");
+        if (!$pageId) {
+            return Response::to404();
+        }
+        return view("admin.page.config");
+    }
+
+    public function modules()
     {
         return view("admin.home");
     }
+
 }

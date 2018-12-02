@@ -30,19 +30,11 @@
     </div>
 </nav>
 
-@include("admin.components.mix")
-
-@inject("menu", "App\Presenter\Admin")
-
 <section class="section">
     <div class="container">
-        <div class="columns">
-            <div class="column is-2 left-aside">
-                {!! $menu->renderMenu() !!}
-            </div>
-            <div class="column is-10 right-aside">
-                @yield("content")
-            </div>
+        <div style="text-align: center;padding: 8rem 4rem;">
+            <h2 class="title">404 NOT FOUND</h2>
+            <a class="button is-text" href="{{ $link or "#" }}">返回上一页</a>
         </div>
     </div>
 </section>
@@ -54,8 +46,6 @@
         </p>
     </div>
 </footer>
-
-@yield("body")
 
 </body>
 

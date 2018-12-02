@@ -22,9 +22,9 @@ $router->get("/test", function () {
 
 $router->get('/', "Admin\HomeController@index");
 
-$router->get('/editModule', ["as" => "edit_module", "uses" => "Admin\HomeController@editRootModule"]);
-$router->post('/editModule', "Admin\HomeController@editRootModule");
-
-$router->get('/editPage', ["as" => "edit_page", "uses" => "Admin\HomeController@editPage"]);
+$router->get('/page', "Admin\HomeController@page");
+$router->get('/page/edit', ["as" => "edit_page", "uses" => "Admin\HomeController@editPage"]);
+$router->post('/page/edit', "Admin\HomeController@editRootModule");
+$router->get('/page/config', ["as" => "config_page", "uses" => "Admin\HomeController@configPage"]);
 
 $router->get('/modules', "Admin\HomeController@modules");

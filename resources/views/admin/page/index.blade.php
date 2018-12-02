@@ -6,7 +6,7 @@
             <input class="input" type="text" placeholder="ID或者名称">
         </div>
         <div class="column is-2">
-            <input class="input" type="text" placeholder="Text input">
+            <input class="input" type="text" placeholder="其他">
         </div>
         <div class="column is-2">
             <div class="select">
@@ -49,8 +49,8 @@
                     <td>{{ $module["create_at"] }}</td>
                     <td>
                         <div class="buttons">
-                            <a href="{{ route('edit_module', ["id" => $module["id"]]) }}" class="button is-small is-primary">编辑</a>
-                            <a href="{{ route('edit_page', ["id" => $module["id"]]) }}" class="button is-small is-primary">编辑页面</a>
+                            <a href="{{ route('edit_page', ["id" => $module["id"]]) }}" class="button is-small is-primary">编辑</a>
+                            <a href="{{ route('config_page', ["id" => $module["id"]]) }}" class="button is-small is-primary">编辑页面</a>
                             <a class="button is-small is-danger">删除</a>
                         </div>
                     </td>
