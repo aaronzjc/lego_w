@@ -25,6 +25,8 @@ $router->get('/', "Admin\HomeController@index");
 $router->get('/page', "Admin\HomeController@page");
 $router->get('/page/edit', ["as" => "edit_page", "uses" => "Admin\HomeController@editPage"]);
 $router->post('/page/edit', "Admin\HomeController@editRootModule");
+
 $router->get('/page/config', ["as" => "config_page", "uses" => "Admin\HomeController@configPage"]);
+$router->post('/page/saveConfig', "Admin\HomeController@savePageConfig");
 
 $router->get('/modules', "Admin\HomeController@modules");

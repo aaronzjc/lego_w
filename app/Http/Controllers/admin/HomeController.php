@@ -58,13 +58,31 @@ class HomeController extends BaseController
         return view('admin.page.edit', ["data" => $module]);
     }
 
-    public function configPage(Request $request)
+    public function configPage(Request $request, ModuleService $service)
     {
         $pageId = $request->get("id");
         if (!$pageId) {
             return Response::to404();
         }
-        return view("admin.page.config");
+
+        $pageTree = $service->pageTree($pageId);
+
+        $pageInfo = $service->pageInfo($pageId);
+
+        return view("admin.page.config", ["page_modules" => $pageTree, "page_info" => $pageInfo]);
+    }
+
+    public function savePageConfig(Request $request, ModuleService $service)
+    {
+        $cnf = $request->post("cnf", []);
+        $pageId = $request->post("page_id");
+        if (empty($cnf)) {
+            return Response::json(["success" => false, "msg" => "配置不存在"]);
+        }
+
+        $status = $service->saveTabConfig($pageId, $cnf);
+
+        return Response::json(["success" => true, "msg" => "保存成功"]);
     }
 
     public function modules()

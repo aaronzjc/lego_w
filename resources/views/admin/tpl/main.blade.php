@@ -12,9 +12,11 @@
     <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/assets/js/vue.toast.js"></script>
 
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/store.js"></script>
 </head>
 
 <body>
@@ -29,6 +31,8 @@
         </div>
     </div>
 </nav>
+
+<div id="toast-container"></div>
 
 @include("admin.components.mix")
 

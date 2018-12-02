@@ -26,7 +26,7 @@
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu" role="menu">
                     <div class="dropdown-content">
-                        <a href="#" class="dropdown-item" v-for="(item, key) in actions.data" @click="chooseModule(key)">{{ item.desc }}</a>
+                        <a class="dropdown-item" v-for="(item, key) in actions.data" @click="chooseModule(key)">{{ item.title }}</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
     <div class="card">
         <header class="card-header" :class="{ 'expired': !info.enabled }">
             <p class="card-header-title dragger">
-                {{ info.data.title }}
+                {{ info.title }}
             </p>
             <span class="card-header-icon" aria-label="more options">
                     <span class="icon" @click="info.state.collapse = !info.state.collapse" v-show="!info.state.collapse">
@@ -65,7 +65,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input" v-model="info.data.title" type="email" placeholder="标题文案">
+                                    <input class="input" v-model="info.title" type="email" placeholder="标题文案">
                                 </p>
                             </div>
                         </div>

@@ -66,3 +66,24 @@ footer.footer {
     font-size: 0.75rem;
     line-height: 1.25rem;
 }
+
+/* 消息提示 */
+#toast-container {
+    z-index:99;
+    position: absolute;
+    right:0;
+}
+
+.awesone-notify {
+    text-align: center;
+    margin: 1rem;
+    width: 15rem;
+    padding: 0.75rem 2rem;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
