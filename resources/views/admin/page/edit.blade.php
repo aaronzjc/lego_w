@@ -24,7 +24,7 @@
 @endsection
 
 
-@section("body")
+@section("body-footer")
     <script type="text/javascript">
         var store = {
             state: {

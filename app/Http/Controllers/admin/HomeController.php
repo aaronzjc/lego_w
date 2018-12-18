@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Response;
 use Illuminate\Http\Request;
 use Lego\Services\ModuleService;
-use Log;
 
 class HomeController extends BaseController
 {
@@ -77,12 +76,15 @@ class HomeController extends BaseController
         $cnf = $request->post("cnf", []);
         $pageId = $request->post("page_id");
         if (empty($cnf)) {
-            return Response::json(["success" => false, "msg" => "配置不存在"]);
+            return Response::jsonFail("配置不存在");
         }
 
-        $status = $service->saveTabConfig($pageId, $cnf);
-
-        return Response::json(["success" => true, "msg" => "保存成功"]);
+        $re = $service->saveTabConfig($pageId, $cnf);
+        if ($re["status"]) {
+            return Response::jsonSuccess($re["msg"]);
+        } else {
+            return Response::jsonFail($re["msg"]);
+        }
     }
 
     public function modules()

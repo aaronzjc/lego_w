@@ -53,6 +53,9 @@ Vue.component("v-act", {
         },
         saveConfig: function() {
             store.saveConfig();
+        },
+        addTab: function() {
+            store.addTab();
         }
     }
 });

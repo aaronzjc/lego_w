@@ -10,8 +10,23 @@ class Response
         return view("admin.404", ["link" => $link]);
     }
 
-    public static function json($data = [])
+    public static function jsonSuccess($msg, $data = [])
     {
-        return json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = [
+            "success" => true,
+            "msg" => $msg?:"成功",
+            "data" => $data
+        ];
+        return json_encode($re, JSON_UNESCAPED_UNICODE);
+    }
+
+    public static function jsonFail($msg, $data = [])
+    {
+        $re = [
+            "success" => false,
+            "msg" => $msg?:"失败",
+            "data" => $data
+        ];
+        return json_encode($re, JSON_UNESCAPED_UNICODE);
     }
 }

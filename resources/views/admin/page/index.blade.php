@@ -21,7 +21,7 @@
             <a class="button is-info">检索</a>
         </div>
         <div class="column is-1">
-            <a class="button is-primary" href="/modules/edit">添加</a>
+            <a class="button is-primary" href="{{ route('edit_page') }}">添加</a>
         </div>
     </div>
     <div>

@@ -24,7 +24,7 @@ const Toast = {
             document.getElementById("toast-container").appendChild(tpl);
             setTimeout(function () {        // 4、延迟2.5秒后移除该提示
                 data.display = false
-            }, 4000)
+            }, 3000)
         }
     }
 };

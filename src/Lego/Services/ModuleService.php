@@ -70,7 +70,7 @@ class ModuleService
         $tabs = Modules::query()->where([
             ["parent_id", "=", $pageId],
             ["type", "=", Modules::MODULE_TAB]
-        ])->whereNull("delete_at")->get()->toArray();
+        ])->whereNull("delete_at")->orderBy("sort", "asc")->get()->toArray();
 
         foreach ($tabs as $tab) {
             $result[$tab["id"]] = Modules::formatTab($tab);
@@ -113,11 +113,11 @@ class ModuleService
         $tab->type = Modules::MODULE_TAB;
         $tab->title = $cnf["title"];
         $tab->status = intval($cnf["enabled"]);
-        $tab->save();
+        $tab->sort = intval($cnf["sort"]);
         $tab->save();
 
         if (empty($cnf["modules"])) {
-            return ["status" => true];
+            return ["status" => true, "msg" => "【{$tab->title}】保存成功"];
         }
 
         foreach ($cnf["modules"] as $k => $module) {
@@ -136,6 +136,6 @@ class ModuleService
             $m->save();
         }
 
-        return ["status" => true];
+        return ["status" => true, "msg" => "【{$tab->title}】保存成功"];
     }
 }

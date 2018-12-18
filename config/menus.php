@@ -15,12 +15,6 @@ return [
                 "pattern" => "page*",
                 "route" => "/page",
                 "groups" => []
-            ],
-            [
-                "title" => "模块管理",
-                "pattern" => "modules",
-                "route" => "/modules",
-                "groups" => []
             ]
         ]
     ]

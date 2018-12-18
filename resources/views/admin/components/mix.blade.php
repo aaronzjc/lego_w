@@ -15,6 +15,7 @@
 <template id="VAct">
     <div class="columns">
         <div class="column">
+            <button class="button is-primary" @click="addTab">添加页签</button>
             <div class="dropdown" :class="{ 'is-active': actions.open }">
                 <div class="dropdown-trigger">
                     <button @click="switchDropdown" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -30,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button is-primary" @click="toggleAll">{{ actions.collapse_all ? "展开全部":"折叠全部" }}</button>
+            <button class="button is-info" @click="toggleAll">{{ actions.collapse_all ? "展开全部":"折叠全部" }}</button>
             <button class="button is-danger" @click="deleteTab">删除页签</button>
             <button class="button is-warning" @click="saveConfig">保存配置</button>
         </div>
