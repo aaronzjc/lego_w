@@ -14,7 +14,7 @@
             .page {
                 background: #fff;
                 margin: 2rem auto;
-                width: 40%;
+                width: 33%;
             }
             .page .tabs, #app .columns, #app .column {
                 margin: 0px 0px;

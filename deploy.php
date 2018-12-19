@@ -26,7 +26,7 @@ add('writable_dirs', []);
 host("tx")
     ->user("memosa")
     ->configFile('~/.ssh/config')
-    ->identityFile('~/.ssh/tx_rsa')
+    ->identityFile('~/.ssh/id_rsa')
     ->forwardAgent(true)
     ->multiplexing(true)
     ->set("deploy_path", "/var/www/html/{{ application }}"); 
