@@ -1,23 +1,8 @@
-const moduleDefine = {
-    "basic_module": {
-        "id": null,
-        "key": null,
-        "type": 20,
-        "module_type": "v-module-basic",
-        "title": "基础信息模块",
-        "enabled": true,
-        "data": {
-            "url": "http://example.com"
-        },
-        "state": {
-            "collapse": false
-        }
-    }
-};
-
 var store = {
     state: {
         "drag": false,
+
+        tpl: tpl,
 
         // 页面基础信息
         "page_info": {},
@@ -36,7 +21,7 @@ var store = {
         // 页面动作
         "page_action": {
             "open": false,
-            "data": moduleDefine,
+            "data": map,
             "collapse_all": false
         }
     },
@@ -81,10 +66,10 @@ var store = {
     },
 
     // 添加一个模块
-    addModule: function(module) {
+    addModule: function(module_type) {
         var st = this.state;
-        if (moduleDefine[module]) {
-            var obj = JSON.parse(JSON.stringify(moduleDefine[module]));
+        if (st["tpl"][module_type]) {
+            var obj = JSON.parse(JSON.stringify(st["tpl"][module_type]));
             obj["key"] = st.page_data[st.page_state.active].modules.length + 1;
             st.page_data[st.page_state.active].modules.push(obj);
         }
@@ -93,7 +78,17 @@ var store = {
 
     // 删除一个模块
     deleteModule: function(idx) {
-        this.state.page_data[this.state.page_state.active].modules.splice(idx, 1);
+        var st = this.state;
+        var id = st.page_data[st.page_state.active]["modules"][idx]["id"];
+        axios.post("/page/deleteModule", {"id": id}).then(function (resp) {
+            if (resp.data.success) {
+                this.state.page_data.modules[st.page_state.active].modules.splice(idx, 1);
+            } else {
+                alert(resp.data.msg);
+            }
+        }.bind(this)).catch(function (resp) {
+
+        });
     },
 
     // 重新排序Tab顺序

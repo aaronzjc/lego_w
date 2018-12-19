@@ -37,12 +37,25 @@
         </div>
     </div>
 </template>
+
+<!-- Tab详情 -->
+<template id="tabInfo">
+    <div class="columns">
+        <div class="column is-one-fifth">
+            <input class="input" type="email" v-model="info.title" placeholder="标题文案">
+        </div>
+        <div class="column is-one-fifth">
+            <button :class="['button', info.enabled ? 'is-warning' : 'is-primary']" @click="changeTabState">{{ info.enabled ? "禁用当前页签" : "启用当前页签" }}</button>
+        </div>
+    </div>
+</template>
+
 <!-- 基础信息模块 -->
 <template id="VModuleBasic">
     <div class="card">
         <header class="card-header" :class="{ 'expired': !info.enabled }">
             <p class="card-header-title dragger">
-                {{ info.title }}
+                图导语模块
             </p>
             <span class="card-header-icon" aria-label="more options">
                     <span class="icon" @click="info.state.collapse = !info.state.collapse" v-show="!info.state.collapse">
@@ -57,47 +70,18 @@
                 </span>
         </header>
         <div class="card-content" v-show="!info.state.collapse">
-            <div class="columns">
-                <div class="column is-two-fifths">
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">文案</label>
-                        </div>
-                        <div class="field-body">
-                            <div class="field">
-                                <p class="control">
-                                    <input class="input" v-model="info.title" type="email" placeholder="标题文案">
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-two-fifths">
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">地址</label>
-                        </div>
-                        <div class="field-body">
-                            <div class="field">
-                                <p class="control">
-                                    <input class="input" v-model="info.data.url" type="email" placeholder="跳转链接">
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="columns">
+                <div class="column">
+                    <label class="label">Banner图地址</label>
+                    <input type="text" class="input" placeholder="banner图" v-model="info.data.banner" />
                 </div>
             </div>
-        </div>
-    </div>
-</template>
-<!-- Tab详情 -->
-<template id="tabInfo">
-    <div class="columns">
-        <div class="column is-one-fifth">
-            <input class="input" type="email" v-model="info.title" placeholder="标题文案">
-        </div>
-        <div class="column is-one-fifth">
-            <button :class="['button', info.enabled ? 'is-warning' : 'is-primary']" @click="changeTabState">{{ info.enabled ? "禁用当前页签" : "启用当前页签" }}</button>
+            <div class="columns">
+                <div class="column">
+                    <label class="label">文案</label>
+                    <textarea cols="30" rows="3" class="textarea" v-model="info.data.text"></textarea>
+                </div>
+            </div>
         </div>
     </div>
 </template>

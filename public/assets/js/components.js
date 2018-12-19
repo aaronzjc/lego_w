@@ -1,3 +1,27 @@
+const map = {
+    "20":  {
+        "title": "基本信息模块",
+        "module_type": "v-module-basic"
+    }
+}
+
+const tpl = {
+    "20": {
+        "id": null,
+        "key": null,
+        "type": 20,
+        "module_type": "module_basic",
+        "title": "基础信息模块",
+        "data": {
+            "banner": "",
+            "text": ""
+        },
+        "state": {
+            "collapse": false
+        }
+    }
+};
+
 Vue.component("v-tabs", {
     template: "#VTabs",
     props: ["items", "active"],

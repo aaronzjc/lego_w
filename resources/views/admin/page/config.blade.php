@@ -23,7 +23,7 @@
                         <v-tab-info :info="page_data[page_state.active]"></v-tab-info>
                         <h4 class="subtitle is-5">模块列表</h4>
                         <draggable v-model="page_data[page_state.active].modules" :options="{animation:150,handle:'.dragger'}" :no-transition-on-drag="true" @start="drag=true" @end="drag=false">
-                            <component :info="module" :idx="index" v-for="(module, index) in page_data[page_state.active].modules" :is="module.module_type" :key="module.key">
+                            <component :info="module" :idx="index" v-for="(module, index) in page_data[page_state.active].modules" :is="page_action['data'][module.type]['module_type']" :key="module.key">
                             </component>
                         </draggable>
                     </div>

@@ -26,6 +26,10 @@
     color: #f03;
 }
 
+.card-content {
+    padding: 1rem 0.5rem;
+}
+
 .tabs ul {
     flex-direction: column;
     border-bottom-width: 0px;

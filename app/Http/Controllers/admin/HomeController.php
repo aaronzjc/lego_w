@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Response;
+use App\Models\Modules;
 use Illuminate\Http\Request;
 use Lego\Services\ModuleService;
 
@@ -87,6 +88,18 @@ class HomeController extends BaseController
         }
     }
 
+    public function deleteModule(Request $request, ModuleService $service)
+    {
+        $moduleId = $request->post("id");
+        if (empty($moduleId)) {
+            return Response::jsonFail("参数异常");
+        }
+
+        $service->deleteModule($moduleId);
+
+        return Response::jsonSuccess("成功");
+    }
+
     public function preview(Request $request, ModuleService $service)
     {
         $pageId = $request->get("id", 0);
@@ -96,7 +109,7 @@ class HomeController extends BaseController
 
         $json = $service->seeJson($pageId);
 
-        return $json;
+        return view("admin.preview");
     }
 
     public function modules()

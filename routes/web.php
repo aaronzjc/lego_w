@@ -28,5 +28,6 @@ $router->post('/page/edit', "Admin\HomeController@editPage");
 
 $router->get('/page/config', ["as" => "config_page", "uses" => "Admin\HomeController@configPage"]);
 $router->post('/page/saveConfig', "Admin\HomeController@savePageConfig");
+$router->post('/page/deleteModule', "Admin\HomeController@deleteModule");
 
 $router->get('/preview', ["as" => "preview", "uses" => "Admin\HomeController@preview"]);

@@ -11,7 +11,7 @@
     <script src="http://cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
     <script src="/assets/js/vue.toast.js"></script>
 
     <link rel="stylesheet" href="/assets/css/app.css">

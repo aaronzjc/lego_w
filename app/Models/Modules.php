@@ -27,8 +27,7 @@ class Modules extends Model
         self::MODULE_PAGE => ["name" => "index", "title" => "剧集"],
         self::MODULE_TAB => ["name" => "tab", "title" => "Tab模块"],
         self::MODULE_BASIC => [
-            "name" => "v-module-basic",
-            "title" => "基本信息模块",
+            "title" => "",
             "format" => [Modules::class, "formatBasicModule"]
         ],
     ];
@@ -78,7 +77,6 @@ class Modules extends Model
         $format = [];
         $format["id"] = intval($module["id"]);
         $format["parent_id"] = intval($module["parent_id"]);
-        $format["module_type"] = self::$moduleTypes[$module["type"]]["name"];
         $format["type"] = $module["type"];
         $format["enabled"] = (bool)intval($module["status"]);
         $format["title"] = $module["title"];
