@@ -138,4 +138,48 @@ class ModuleService
 
         return ["status" => true, "msg" => "【{$tab->title}】保存成功"];
     }
+
+    public function seeJson($pageId)
+    {
+        $root = Modules::query()->where([
+            ["id" , "=", $pageId],
+            ["type", "=", Modules::MODULE_PAGE]
+        ])->first()->toArray();
+
+        $tabs = Modules::query()
+            ->where("parent_id", $root["id"])
+            ->where("type", Modules::MODULE_TAB)
+            ->orderBy("sort", "asc")
+            ->get()->toArray();
+
+        $modules = Modules::query()
+            ->whereIn("parent_id", array_column($tabs, "id"))
+            ->orderBy("sort", "asc")
+            ->get()->toArray();
+        $tabMs = [];
+        foreach ($modules as $m) {
+            $tabMs[$m["parent_id"]][] = [
+                "id" => $m["id"],
+                "title" => $m["title"],
+                "data" => json_decode($m["data"])?:new \stdClass
+            ];
+        }
+
+        $json = [
+            "id" => $root["id"],
+            "title" => $root["title"],
+            "modules" => []
+        ];
+
+        foreach ($tabs as $tab) {
+            $json["modules"][] = [
+                "id" => $tab["id"],
+                "title" => $tab["title"],
+                "data" => json_decode($tab["data"])?:new \stdClass,
+                "modules" => $tabMs[$tab["id"]]??[]
+            ];
+        }
+
+        return json_encode($json);
+    }
 }

@@ -42,7 +42,7 @@
 
                     console.log(resp);
                     if (resp.data.success) {
-                        window.location.href = "/";
+                        window.location.href = "/page";
                     }
                 }).catch(function (exp) {
                     console.log(exp);

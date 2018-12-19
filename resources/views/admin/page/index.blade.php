@@ -3,12 +3,6 @@
 @section("content")
     <div class="columns">
         <div class="column is-2">
-            <input class="input" type="text" placeholder="ID或者名称">
-        </div>
-        <div class="column is-2">
-            <input class="input" type="text" placeholder="其他">
-        </div>
-        <div class="column is-2">
             <div class="select">
                 <select>
                     <option>专题类型</option>
@@ -17,10 +11,14 @@
                 </select>
             </div>
         </div>
-        <div class="column is-1">
-            <a class="button is-info">检索</a>
+        <div class="column is-2">
+            <input class="input" type="text" placeholder="ID或者名称">
         </div>
-        <div class="column is-1">
+        <div class="column is-2">
+            <input class="input" type="text" placeholder="其他">
+        </div>
+        <div class="column is-2">
+            <a class="button is-info">检索</a>
             <a class="button is-primary" href="{{ route('edit_page') }}">添加</a>
         </div>
     </div>
@@ -50,7 +48,8 @@
                     <td>
                         <div class="buttons">
                             <a href="{{ route('edit_page', ["id" => $module["id"]]) }}" class="button is-small is-primary">编辑</a>
-                            <a href="{{ route('config_page', ["id" => $module["id"]]) }}" class="button is-small is-primary">编辑页面</a>
+                            <a href="{{ route('config_page', ["id" => $module["id"]]) }}" class="button is-small is-primary">页面配置</a>
+                            <a class="button is-small is-link" href="{{ route('preview', ["id" => $module["id"]]) }}" target="_blank">预览</a>
                             <a class="button is-small is-danger">删除</a>
                         </div>
                     </td>

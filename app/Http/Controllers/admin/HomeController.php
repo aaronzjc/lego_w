@@ -87,6 +87,18 @@ class HomeController extends BaseController
         }
     }
 
+    public function preview(Request $request, ModuleService $service)
+    {
+        $pageId = $request->get("id", 0);
+        if (!$pageId) {
+            return Response::to404();
+        }
+
+        $json = $service->seeJson($pageId);
+
+        return $json;
+    }
+
     public function modules()
     {
         return view("admin.home");
