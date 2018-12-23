@@ -48,3 +48,6 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
 ]);
+after("deploy", function () {
+    run('sudo /etc/init.d/php-fpm restart');
+});
