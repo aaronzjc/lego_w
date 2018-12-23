@@ -34,6 +34,10 @@ host("tx")
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
+task("reload:php-fpm", function () {
+    run('sudo /etc/init.d/php-fpm restart');
+});
+
 task('deploy', [
     'deploy:prepare',
     'deploy:lock',
@@ -48,6 +52,5 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
 ]);
-after("deploy", function () {
-    run('sudo /etc/init.d/php-fpm restart');
-});
+
+after("deploy", "reload:php-fpm");
