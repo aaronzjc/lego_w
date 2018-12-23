@@ -3,13 +3,14 @@ const map = {
         "title": "基本信息模块",
         "module_type": "v-module-basic"
     }
-}
+};
 
 const tpl = {
     "20": {
         "id": null,
         "key": null,
         "type": 20,
+        "enabled": true,
         "module_type": "module_basic",
         "title": "基础信息模块",
         "data": {

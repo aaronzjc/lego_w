@@ -82,7 +82,7 @@ var store = {
         var id = st.page_data[st.page_state.active]["modules"][idx]["id"];
         axios.post("/page/deleteModule", {"id": id}).then(function (resp) {
             if (resp.data.success) {
-                this.state.page_data.modules[st.page_state.active].modules.splice(idx, 1);
+                st.page_data[st.page_state.active].modules.splice(idx, 1);
             } else {
                 alert(resp.data.msg);
             }

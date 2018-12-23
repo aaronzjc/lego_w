@@ -7,6 +7,7 @@
 
         <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
 
+        <script src="/assets/js/mobile/components.js"></script>
         <style>
             html,body {
                 background: #f2f2f2;
@@ -32,31 +33,27 @@
     </head>
 
     <body>
+        @include("mobile.components.mix")
 
+        @verbatim
         <div id="app">
             <div class="container page">
-                <div class="tabs is-centered">
-                    <ul>
-                        <li class="is-active"><a>第一集</a></li>
-                        <li><a>第二集</a></li>
-                        <li><a>第三集</a></li>
-                    </ul>
-                </div>
-                
-                <!-- 基本信息模块 -->
-                <div class="columns">
-                    <div class="column">
-                        <img src="https://wx1.sinaimg.cn/large/71efa8f5ly1fwfo94gylfj20ku05m0tp.jpg" alt="">
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        <article>猜评团未能猜出你的心声？微博酷评官给出了面具背后“最令人怀疑”的歌手人选，大胆发表你的看法，组成全网最志同道合闭眼玩家联盟</article>
-                    </div>
-                </div>
+                <m-tab :tabs="page.tab_list" :active="active"></m-tab>
 
-
+                <component :card="card" v-for="(card, index) in page.tab_list[active].card_list" :is="map[card.card_type]" :key="index"></component>
             </div>
         </div>
+        @endverbatim
+
+        <script>
+            new Vue({
+                "el": "#app",
+                "data": {
+                    "map": map,
+                    "active": 0,
+                    "page": @json($page)
+                }
+            })
+        </script>
     </body>
 </html>

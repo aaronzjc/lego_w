@@ -139,7 +139,7 @@ class ModuleService
         return ["status" => true, "msg" => "【{$tab->title}】保存成功"];
     }
 
-    public function seeJson($pageId)
+    public function previewPage($pageId)
     {
         $root = Modules::query()->where([
             ["id" , "=", $pageId],
@@ -160,26 +160,27 @@ class ModuleService
         foreach ($modules as $m) {
             $tabMs[$m["parent_id"]][] = [
                 "id" => $m["id"],
+                "card_type" => $m["type"],
                 "title" => $m["title"],
                 "data" => json_decode($m["data"])?:new \stdClass
             ];
         }
 
-        $json = [
+        $page = [
             "id" => $root["id"],
             "title" => $root["title"],
-            "modules" => []
+            "tab_list" => []
         ];
 
         foreach ($tabs as $tab) {
-            $json["modules"][] = [
+            $page["tab_list"][] = [
                 "id" => $tab["id"],
                 "title" => $tab["title"],
                 "data" => json_decode($tab["data"])?:new \stdClass,
-                "modules" => $tabMs[$tab["id"]]??[]
+                "card_list" => $tabMs[$tab["id"]]??[]
             ];
         }
 
-        return json_encode($json);
+        return $page;
     }
 }

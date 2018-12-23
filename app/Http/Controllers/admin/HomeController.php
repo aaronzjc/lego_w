@@ -107,9 +107,8 @@ class HomeController extends BaseController
             return Response::to404();
         }
 
-        $json = $service->seeJson($pageId);
-
-        return view("admin.preview");
+        $page = $service->previewPage($pageId);
+        return view("mobile.preview", ["page" => $page]);
     }
 
     public function modules()
