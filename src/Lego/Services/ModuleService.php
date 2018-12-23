@@ -139,46 +139,53 @@ class ModuleService
         return ["status" => true, "msg" => "【{$tab->title}】保存成功"];
     }
 
-    public function previewPage($pageId)
+    public function previewPage($pageId = 0, $tabId = 0)
     {
         $root = Modules::query()->where([
             ["id" , "=", $pageId],
             ["type", "=", Modules::MODULE_PAGE]
         ])->first()->toArray();
 
-        $tabs = Modules::query()
-            ->where("parent_id", $root["id"])
-            ->where("type", Modules::MODULE_TAB)
-            ->orderBy("sort", "asc")
-            ->get()->toArray();
-
-        $modules = Modules::query()
-            ->whereIn("parent_id", array_column($tabs, "id"))
-            ->orderBy("sort", "asc")
-            ->get()->toArray();
-        $tabMs = [];
-        foreach ($modules as $m) {
-            $tabMs[$m["parent_id"]][] = [
-                "id" => $m["id"],
-                "card_type" => $m["type"],
-                "title" => $m["title"],
-                "data" => json_decode($m["data"])?:new \stdClass
-            ];
-        }
-
         $page = [
             "id" => $root["id"],
             "title" => $root["title"],
-            "tab_list" => []
+            "active" => 0,
+            "tab_list" => [],
+            "card_list" => [],
         ];
 
-        foreach ($tabs as $tab) {
+        $tabs = Modules::query()
+            ->where("parent_id", $root["id"])
+            ->where("type", Modules::MODULE_TAB)
+            ->where("status", 1)
+            ->orderBy("sort", "asc")
+            ->get()->toArray();
+
+        foreach ($tabs as $k => $tab) {
+            if ($tab["id"] == $tabId) {
+                $page["active"] = $k;
+            }
+
             $page["tab_list"][] = [
                 "id" => $tab["id"],
                 "title" => $tab["title"],
-                "data" => json_decode($tab["data"])?:new \stdClass,
-                "card_list" => $tabMs[$tab["id"]]??[]
+                "data" => json_decode($tab["data"])?:new \stdClass
             ];
+        }
+
+        if ($tabId) {
+            $modules = Modules::query()
+                ->where("parent_id", $tabId)
+                ->orderBy("sort", "asc")
+                ->get()->toArray();
+            foreach ($modules as $m) {
+                $page["card_list"][] = [
+                    "id" => $m["id"],
+                    "card_type" => $m["type"],
+                    "title" => $m["title"],
+                    "data" => json_decode($m["data"])?:new \stdClass
+                ];
+            }
         }
 
         return $page;

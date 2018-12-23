@@ -12,6 +12,8 @@ Vue.component("m-tab", {
             if (index === this.active) {
                 return false;
             }
+
+            store.switchTab(index);
         }
     }
 });

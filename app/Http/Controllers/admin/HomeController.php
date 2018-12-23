@@ -103,11 +103,15 @@ class HomeController extends BaseController
     public function preview(Request $request, ModuleService $service)
     {
         $pageId = $request->get("id", 0);
+        $tabId = $request->get("tab_id", 0);
         if (!$pageId) {
             return Response::to404();
         }
 
-        $page = $service->previewPage($pageId);
+        $page = $service->previewPage($pageId, $tabId);
+        if ($request->get("json")) {
+            return $page;
+        }
         return view("mobile.preview", ["page" => $page]);
     }
 

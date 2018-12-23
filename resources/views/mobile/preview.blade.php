@@ -1,11 +1,14 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>预览</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
         <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+        <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
 
         <script src="/assets/js/mobile/components.js"></script>
         <style>
@@ -38,20 +41,50 @@
         @verbatim
         <div id="app">
             <div class="container page">
-                <m-tab :tabs="page.tab_list" :active="active"></m-tab>
+                <m-tab :tabs="tab_list" :active="active"></m-tab>
 
-                <component :card="card" v-for="(card, index) in page.tab_list[active].card_list" :is="map[card.card_type]" :key="index"></component>
+                <component :card="card" v-for="(card, index) in card_list" :is="map[card.card_type]" :key="index"></component>
             </div>
         </div>
         @endverbatim
 
         <script>
+            var page = @json($page);
+            var store = {
+                state: {
+                    "map": map,
+                    "id": page.id,
+                    "active": page.active,
+                    "tab_list": page.tab_list,
+                    "card_list": page.card_list
+                },
+                initPage: function (page) {
+                    this.state.id = page.id;
+                    this.state.active = page.active;
+                    this.state.tab_list = page.tab_list;
+                    this.state.card_list = page.card_list;
+                },
+                switchTab: function (index) {
+                    this.state.active = index;
+                    var pageId = this.state.id;
+                    var tabId = this.state.tab_list[this.state.active]["id"];
+                    axios.get("/preview", {
+                        "params": {"id": pageId, "tab_id": tabId, "json": 1}
+                        }).then(function (resp) {
+                        if (resp.data) {
+                            this.initPage(resp.data);
+                        }
+                    }.bind(this)).catch(function (resp) {
+
+                    });
+                }
+            };
+
             new Vue({
                 "el": "#app",
-                "data": {
-                    "map": map,
-                    "active": 0,
-                    "page": @json($page)
+                "data": store.state,
+                created: function () {
+                    store.switchTab(0);
                 }
             })
         </script>
