@@ -35,7 +35,7 @@ host("tx")
 after('deploy:failed', 'deploy:unlock');
 
 task("reload:php-fpm", function () {
-    run('sudo /etc/init.d/php-fpm restart');
+    run('sudo service php-fpm restart');
 });
 
 task('deploy', [
