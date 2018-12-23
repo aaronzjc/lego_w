@@ -49,14 +49,26 @@
         @endverbatim
 
         <script>
-            var page = @json($page);
             var store = {
                 state: {
                     "map": map,
-                    "id": page.id,
-                    "active": page.active,
-                    "tab_list": page.tab_list,
-                    "card_list": page.card_list
+                    "id": {{ $pageId }},
+                    "active": 0,
+                    "tab_list": [],
+                    "card_list": []
+                },
+                init: function () {
+                    var pageId = this.state.id;
+                    axios.get("/p/aj", {
+                        "params": {"id": pageId}
+                        }).then(function (resp) {
+                        if (resp.data.data) {
+                            this.initPage(resp.data.data);
+                            this.switchTab(0);
+                        }
+                    }.bind(this)).catch(function (resp) {
+
+                    });
                 },
                 initPage: function (page) {
                     this.state.id = page.id;
@@ -68,11 +80,11 @@
                     this.state.active = index;
                     var pageId = this.state.id;
                     var tabId = this.state.tab_list[this.state.active]["id"];
-                    axios.get("/preview", {
+                    axios.get("/p/aj", {
                         "params": {"id": pageId, "tab_id": tabId, "json": 1}
                         }).then(function (resp) {
-                        if (resp.data) {
-                            this.initPage(resp.data);
+                        if (resp.data.data) {
+                            this.initPage(resp.data.data);
                         }
                     }.bind(this)).catch(function (resp) {
 
@@ -84,7 +96,7 @@
                 "el": "#app",
                 "data": store.state,
                 created: function () {
-                    store.switchTab(0);
+                    store.init();
                 }
             })
         </script>

@@ -165,7 +165,6 @@ class ModuleService
             if ($tab["id"] == $tabId) {
                 $page["active"] = $k;
             }
-
             $page["tab_list"][] = [
                 "id" => $tab["id"],
                 "title" => $tab["title"],

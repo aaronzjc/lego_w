@@ -30,4 +30,5 @@ $router->get('/page/config', ["as" => "config_page", "uses" => "Admin\HomeContro
 $router->post('/page/saveConfig', "Admin\HomeController@savePageConfig");
 $router->post('/page/deleteModule', "Admin\HomeController@deleteModule");
 
-$router->get('/preview', ["as" => "preview", "uses" => "Admin\HomeController@preview"]);
+$router->get('/p', ["as" => "preview", "uses" => "Admin\HomeController@preview"]);
+$router->get('/p/aj', ["as" => "preview_json", "uses" => "Admin\HomeController@previewJson"]);
